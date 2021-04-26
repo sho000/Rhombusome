@@ -6,6 +6,7 @@ import rhinoscriptsyntax as rs
 # setLayer
 ##########################################
 setLayer()
+checkFont() # checks if system has 'DIN' font.
 ##########################################
 # EnableRedraw
 rs.EnableRedraw(False)
