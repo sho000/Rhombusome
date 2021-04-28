@@ -4,6 +4,24 @@ import random
 from System.Drawing import Color
 from emblem.Emblem import *
 
+def checkFont():
+    global font
+    # dummy text object to test if this font is available
+    obj = rs.AddText('font test',
+                     [0,0,0],
+                     1.0,
+                     "Alte DIN 1451 Mittelschrift",
+                     0,
+                     0)
+
+    if not obj == None:
+        font = "Alte DIN 1451 Mittelschrift"
+        rs.DeleteObject(obj)
+    else:
+        # default to generic font
+        font = "Arial"
+
+
 def setLayer():
     # ---emblem
     if not rs.IsLayer("emblem"):
@@ -102,7 +120,6 @@ def drawDivisionLine(emblem,color=True):
         txt = "%d" % (angle)
         height = 1.2
         pt = [0,height/2.0,0]
-        font = "Alte DIN 1451 Mittelschrift"
         font_style = 0
         justification = 2 + 65536
         obj = rs.AddText(txt,
@@ -135,7 +152,6 @@ def drawRegularOffsetLine(emblem):
         txt = "%d-%d" % (node.lines[0].angle, node.lines[1].angle)
         height = 1.2
         pt=[node.pt[0],node.pt[1]+height/2.0,node.pt[2]]
-        font="Alte DIN 1451 Mittelschrift"
         font_style = 0
         justification = 2+65536
         obj = rs.AddText( txt,
@@ -279,7 +295,7 @@ def drawEhombusTilingByRegularOffsetLine(emblem):
         obj = rs.AddText(txt,
                          pt,
                          height,
-                         font="Alte DIN 1451 Mittelschrift",
+                         font,
                          font_style=0,
                          justification=2 + 65536)
         rs.ObjectLayer(obj, "textRhomboid")
